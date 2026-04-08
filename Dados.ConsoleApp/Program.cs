@@ -41,13 +41,13 @@ do
     numeroRodada += 1;
     Console.WriteLine($"Rodada nº: {numeroRodada}");
 
-    dadoJogador1 = dado.Next(1, 6);
+    dadoJogador1 = dado.Next(1, 7);
     posicaoJogador1 += dadoJogador1;
 
     if (dadoJogador1 == 6)
     {
         Console.WriteLine($"Legal, você tirou {dadoJogador1} e ganhou uma rodada extra.");
-        dadoJogador1 = dado.Next(1, 6);
+        dadoJogador1 = dado.Next(1, 7);
         posicaoJogador1 += dadoJogador1;
     }
 
@@ -56,7 +56,7 @@ do
         Console.WriteLine($"Legal Jogador 1! Você parou na posição: {posicaoJogador1} , avance 03 casas!");
         posicaoJogador1 += 3;
     }
-    else if (posicaoJogador1 == 7 || posicaoJogador1 == 13 || posicaoJogador1 == 20)
+    else if (posicaoJogador1 == 7 || posicaoJogador1 == 13 || posicaoJogador1 == 20 || posicaoJogador1 == 29)
     {
         Console.WriteLine($"Pena Jogador 1! Você parou na posição: {posicaoJogador1} , recue 02 casas!");
         if (posicaoJogador1 >= 2)
@@ -65,13 +65,15 @@ do
             posicaoJogador1 = 0;
     }
 
-    dadoJogador2 = dado.Next(1, 6);
+    Console.WriteLine($"Posição do jogador 1: {posicaoJogador1}");
+
+    dadoJogador2 = dado.Next(1, 7);
     posicaoJogador2 += dadoJogador2;
 
     if (dadoJogador2 == 6)
     {
         Console.WriteLine($"Legal, você tirou {dadoJogador2} e ganhou uma rodada extra.");
-        dadoJogador2 = dado.Next(1, 6);
+        dadoJogador2 = dado.Next(1, 7);
         posicaoJogador2 += dadoJogador2;
     }
 
@@ -80,7 +82,7 @@ do
         Console.WriteLine($"Legal Jogador 2! Você parou na posição: {posicaoJogador2} , avance 03 casas!");
         posicaoJogador2 += 3;
     }
-    else if (posicaoJogador2 == 7 || posicaoJogador2 == 13 || posicaoJogador2 == 20)
+    else if (posicaoJogador2 == 7 || posicaoJogador2 == 13 || posicaoJogador2 == 20 || posicaoJogador2 == 29)
     {
         Console.WriteLine($"Pena Jogador 2! Você parou na posição: {posicaoJogador2} , recue 02 casas!");
         if (posicaoJogador2 >= 2)
@@ -89,7 +91,6 @@ do
             posicaoJogador2 = 0;
     }
 
-    Console.WriteLine($"Posição do jogador 1: {posicaoJogador1}");
     Console.WriteLine($"Posição do jogador 2: {posicaoJogador2}");
 
     if (posicaoJogador1 >= 30)
