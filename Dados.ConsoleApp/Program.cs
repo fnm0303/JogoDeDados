@@ -1,1 +1,94 @@
-﻿
+﻿/*
+Regras e Funcionalidades:
+1. Pista:
+○ A pista é representada por uma linha numérica (ex.: de 0 a 30).
+○ O jogador e o computador começam na posição 0.
+2. Turnos:
+○ O jogador e o computador alternam turnos para rolar um dado (gerar um número aleatório
+entre 1 e 6).
+○ O número gerado é somado à posição atual do competidor.
+○ O jogo exibe a posição atual do jogador e do computador após cada rodada.
+3. Condição de Vitória:
+○ O primeiro competidor a alcançar ou ultrapassar a posição final (ex.: 30) vence o jogo.
+4. Interação:
+○ O jogador rola o dado pressionando uma tecla (ex.: Enter).
+○ O computador rola o dado automaticamente no seu turno.
+
+Dificuldades e Conceitos Envolvidos:
+● Geração de números aleatórios: Para simular o lançamento do dado.
+● Estruturas de repetição: Para controlar os turnos dos competidores.
+● Condicionais: Para verificar eventos especiais e a condição de vitória.
+● Interação com o usuário: Para permitir que o jogador role o dado.
+● Lógica de turnos: Alternar entre o jogador e o computador.
+
+Eventos Especiais:
+5. Para tornar o jogo mais interessante, algumas posições na pista podem ter eventos especiais:
+○ Avanço extra: Se o competidor parar em uma posição específica (ex.: 5, 10, 15), ele avança +3
+casas.
+○ Recuo: Se o competidor parar em outra posição específica (ex.: 7, 13, 20), ele recua -2 casas.
+○ Rodada extra: Se o competidor tirar 6 no dado, ele ganha uma rodada extra.
+*/
+Console.Clear();
+Console.WriteLine("---------- JOGO DE DADOS ------------");
+
+int posicaoJogador1 = 0, posicaoJogador2 = 0, dadoJogador1, dadoJogador2, numeroRodada = 0;
+Random dado = new Random();
+
+do
+{
+    Console.WriteLine("\nPressione ENTER para começar a próxima rodada!");
+    Console.ReadLine();
+    numeroRodada += 1;
+    Console.WriteLine($"Rodada nº: {numeroRodada}");
+
+    dadoJogador1 = dado.Next(1, 6);
+    posicaoJogador1 += dadoJogador1;
+
+    if (posicaoJogador1 == 5 || posicaoJogador1 == 10 || posicaoJogador1 == 15)
+    {
+        Console.WriteLine($"Legal Jogador 1! Você parou na posição: {posicaoJogador1} , avance 03 casas!");
+        posicaoJogador1 += 3;
+    }
+    else if (posicaoJogador1 == 7 || posicaoJogador1 == 13 || posicaoJogador1 == 20)
+    {
+        Console.WriteLine($"Pena Jogador 1! Você parou na posição: {posicaoJogador1} , recue 02 casas!");
+        if (posicaoJogador1 >= 2)
+            posicaoJogador1 -= 2;
+        else
+            posicaoJogador1 = 0;
+    }
+
+    dadoJogador2 = dado.Next(1, 6);
+    posicaoJogador2 += dadoJogador2;
+
+    if (posicaoJogador2 == 5 || posicaoJogador2 == 10 || posicaoJogador2 == 15)
+    {
+        Console.WriteLine($"Legal Jogador 2! Você parou na posição: {posicaoJogador2} , avance 03 casas!");
+        posicaoJogador2 += 3;
+    }
+    else if (posicaoJogador2 == 7 || posicaoJogador2 == 13 || posicaoJogador2 == 20)
+    {
+        Console.WriteLine($"Pena Jogador 2! Você parou na posição: {posicaoJogador2} , recue 02 casas!");
+        if (posicaoJogador2 >= 2)
+            posicaoJogador2 -= 2;
+        else
+            posicaoJogador2 = 0;
+    }
+
+    Console.WriteLine($"Posição do jogador 1: {posicaoJogador1}");
+    Console.WriteLine($"Posição do jogador 2: {posicaoJogador2}");
+
+    if (posicaoJogador1 >= 30)
+    {
+        Console.WriteLine("Parabéns Jogador 1! Você ganhou!");
+        break;
+    }
+    else if (posicaoJogador2 >= 30)
+    {
+        Console.WriteLine("Parabéns Jogador 2! Você ganhou!");
+        break;
+    }
+
+} while (posicaoJogador1 < 30 && posicaoJogador2 < 30);
+
+Console.ReadLine();
