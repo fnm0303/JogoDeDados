@@ -28,7 +28,7 @@ casas.
 ○ Recuo: Se o competidor parar em outra posição específica (ex.: 7, 13, 20), ele recua -2 casas.
 ○ Rodada extra: Se o competidor tirar 6 no dado, ele ganha uma rodada extra.
 */
-Console.Clear();
+//Console.Clear();
 Console.WriteLine("---------- JOGO DE DADOS ------------");
 
 int posicaoJogador1 = 0, posicaoJogador2 = 0, dadoJogador1, dadoJogador2, numeroRodada = 0;
@@ -43,6 +43,13 @@ do
 
     dadoJogador1 = dado.Next(1, 6);
     posicaoJogador1 += dadoJogador1;
+
+    if (dadoJogador1 == 6)
+    {
+        Console.WriteLine($"Legal, você tirou {dadoJogador1} e ganhou uma rodada extra.");
+        dadoJogador1 = dado.Next(1, 6);
+        posicaoJogador1 += dadoJogador1;
+    }
 
     if (posicaoJogador1 == 5 || posicaoJogador1 == 10 || posicaoJogador1 == 15)
     {
@@ -60,6 +67,13 @@ do
 
     dadoJogador2 = dado.Next(1, 6);
     posicaoJogador2 += dadoJogador2;
+
+    if (dadoJogador2 == 6)
+    {
+        Console.WriteLine($"Legal, você tirou {dadoJogador2} e ganhou uma rodada extra.");
+        dadoJogador2 = dado.Next(1, 6);
+        posicaoJogador2 += dadoJogador2;
+    }
 
     if (posicaoJogador2 == 5 || posicaoJogador2 == 10 || posicaoJogador2 == 15)
     {
