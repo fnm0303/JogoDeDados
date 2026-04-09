@@ -59,10 +59,7 @@ do
     else if (posicaoJogador1 == 7 || posicaoJogador1 == 13 || posicaoJogador1 == 20 || posicaoJogador1 == 29)
     {
         Console.WriteLine($"Pena Jogador 1! Você parou na posição: {posicaoJogador1} , recue 02 casas!");
-        if (posicaoJogador1 >= 2)
-            posicaoJogador1 -= 2;
-        else
-            posicaoJogador1 = 0;
+        posicaoJogador1 -= 2;
     }
 
     Console.WriteLine($"Posição do jogador 1: {posicaoJogador1}");
