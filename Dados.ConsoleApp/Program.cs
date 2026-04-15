@@ -40,33 +40,30 @@ class Program
         do
         {
             numeroRodada += 1;
-            posicaoJogador1 = RodadaDoJogador(numeroRodada, posicaoJogador1);
+            Console.WriteLine($"\nRodada nº: {numeroRodada}");
+
+            posicaoJogador1 = RodadaDoJogador(posicaoJogador1);
 
             posicaoJogador2 = RodadaDoComputador(posicaoJogador2);
 
+            ChecarSeJogador1Ganhou(posicaoJogador1);
+
+            ChecarSeComputadorGanhou(posicaoJogador2);
+
             if (posicaoJogador1 >= 30)
-            {
-                Console.WriteLine("Parabéns Jogador 1! Você ganhou!");
                 break;
-            }
-            else if (posicaoJogador2 >= 30)
-            {
-                Console.WriteLine("Parabéns Jogador 2! Você ganhou!");
+
+            if (posicaoJogador2 >= 30)
                 break;
-            }
 
         } while (posicaoJogador1 < 30 && posicaoJogador2 < 30);
 
-        Console.ReadLine();
     }
 
-
-    static int RodadaDoJogador(int numeroRodada, int posicaoJogador1)
+    static int RodadaDoJogador(int posicaoJogador1)
     {
         Console.WriteLine("\nPressione ENTER para começar a próxima rodada!");
         Console.ReadLine();
-
-        Console.WriteLine($"Rodada nº: {numeroRodada}");
 
         Random dado = new Random();
         int dadoJogador1 = dado.Next(1, 7);
@@ -93,7 +90,14 @@ class Program
         Console.WriteLine($"Posição do jogador 1: {posicaoJogador1}");
         return posicaoJogador1;
     }
-
+    static void ChecarSeJogador1Ganhou(int posicaoJogador1)
+    {
+        if (posicaoJogador1 >= 30)
+        {
+            Console.WriteLine("Parabéns Jogador 1! Você ganhou!");
+            Console.ReadLine();
+        }
+    }
     static int RodadaDoComputador(int posicaoJogador2)
     {
         Random dado = new Random();
@@ -123,5 +127,13 @@ class Program
 
         Console.WriteLine($"Posição do jogador 2: {posicaoJogador2}");
         return posicaoJogador2;
+    }
+    static void ChecarSeComputadorGanhou(int posicaoJogador2)
+    {
+        if (posicaoJogador2 >= 30)
+        {
+            Console.WriteLine("Parabéns Computador! Você ganhou!");
+            Console.ReadLine();
+        }
     }
 }
