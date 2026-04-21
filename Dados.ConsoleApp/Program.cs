@@ -28,112 +28,41 @@ casas.
 ○ Recuo: Se o competidor parar em outra posição específica (ex.: 7, 13, 20), ele recua -2 casas.
 ○ Rodada extra: Se o competidor tirar 6 no dado, ele ganha uma rodada extra.
 */
+using Dados.ConsoleApp.Entidades;
+
 class Program
 {
     static void Main(string[] args)
     {
-        Console.Clear();
-        Console.WriteLine("---------- JOGO DE DADOS ------------");
-
-        int posicaoJogador1 = 0, posicaoJogador2 = 0, numeroRodada = 0;
-
-        do
+        while (true)
         {
-            numeroRodada += 1;
-            Console.WriteLine($"\nRodada nº: {numeroRodada}");
+            Console.Clear();
+            Console.WriteLine("---------- JOGO DE DADOS ------------");
+            int numeroRodada = 0;
+            Jogador1.posicao = 0;
+            Jogador2.posicao = 0;
+            do
+            {
+                numeroRodada += 1;
+                Console.WriteLine($"\nRodada nº: {numeroRodada}");
 
-            posicaoJogador1 = RodadaDoJogador(posicaoJogador1);
+                Jogador1.RodadaDoJogador();
 
-            posicaoJogador2 = RodadaDoComputador(posicaoJogador2);
+                Jogador2.RodadaDoComputador();
 
-            ChecarSeJogador1Ganhou(posicaoJogador1);
+                if (Jogador1.VenceuPartida())
+                    break;
 
-            ChecarSeComputadorGanhou(posicaoJogador2);
+                if (Jogador2.VenceuPartida())
+                    break;
 
-            if (posicaoJogador1 >= 30)
+            } while (Jogador1.posicao < 30 && Jogador2.posicao < 30);
+
+            Console.Write("Deseja jogar novamente? s/N");
+            string? opcaoContinuar = Console.ReadLine()?.ToUpper(); //avisando ao compilador que a variável pode ser nula
+
+            if (opcaoContinuar != "S")
                 break;
-
-            if (posicaoJogador2 >= 30)
-                break;
-
-        } while (posicaoJogador1 < 30 && posicaoJogador2 < 30);
-
-    }
-
-    static int RodadaDoJogador(int posicaoJogador1)
-    {
-        Console.WriteLine("\nPressione ENTER para começar a próxima rodada!");
-        Console.ReadLine();
-
-        Random dado = new Random();
-        int dadoJogador1 = dado.Next(1, 7);
-        posicaoJogador1 += dadoJogador1;
-
-        if (dadoJogador1 == 6)
-        {
-            Console.WriteLine($"Legal, você tirou {dadoJogador1} e ganhou uma rodada extra.");
-            dadoJogador1 = dado.Next(1, 7);
-            posicaoJogador1 += dadoJogador1;
-        }
-
-        if (posicaoJogador1 == 5 || posicaoJogador1 == 10 || posicaoJogador1 == 15)
-        {
-            Console.WriteLine($"Legal Jogador 1! Você parou na posição: {posicaoJogador1} , avance 03 casas!");
-            posicaoJogador1 += 3;
-        }
-        else if (posicaoJogador1 == 7 || posicaoJogador1 == 13 || posicaoJogador1 == 20 || posicaoJogador1 == 29)
-        {
-            Console.WriteLine($"Pena Jogador 1! Você parou na posição: {posicaoJogador1} , recue 02 casas!");
-            posicaoJogador1 -= 2;
-        }
-
-        Console.WriteLine($"Posição do jogador 1: {posicaoJogador1}");
-        return posicaoJogador1;
-    }
-    static void ChecarSeJogador1Ganhou(int posicaoJogador1)
-    {
-        if (posicaoJogador1 >= 30)
-        {
-            Console.WriteLine("Parabéns Jogador 1! Você ganhou!");
-            Console.ReadLine();
-        }
-    }
-    static int RodadaDoComputador(int posicaoJogador2)
-    {
-        Random dado = new Random();
-        int dadoJogador2 = dado.Next(1, 7);
-        posicaoJogador2 += dadoJogador2;
-
-        if (dadoJogador2 == 6)
-        {
-            Console.WriteLine($"Legal, você tirou {dadoJogador2} e ganhou uma rodada extra.");
-            dadoJogador2 = dado.Next(1, 7);
-            posicaoJogador2 += dadoJogador2;
-        }
-
-        if (posicaoJogador2 == 5 || posicaoJogador2 == 10 || posicaoJogador2 == 15)
-        {
-            Console.WriteLine($"Legal Jogador 2! Você parou na posição: {posicaoJogador2} , avance 03 casas!");
-            posicaoJogador2 += 3;
-        }
-        else if (posicaoJogador2 == 7 || posicaoJogador2 == 13 || posicaoJogador2 == 20 || posicaoJogador2 == 29)
-        {
-            Console.WriteLine($"Pena Jogador 2! Você parou na posição: {posicaoJogador2} , recue 02 casas!");
-            if (posicaoJogador2 >= 2)
-                posicaoJogador2 -= 2;
-            else
-                posicaoJogador2 = 0;
-        }
-
-        Console.WriteLine($"Posição do jogador 2: {posicaoJogador2}");
-        return posicaoJogador2;
-    }
-    static void ChecarSeComputadorGanhou(int posicaoJogador2)
-    {
-        if (posicaoJogador2 >= 30)
-        {
-            Console.WriteLine("Parabéns Computador! Você ganhou!");
-            Console.ReadLine();
         }
     }
 }
